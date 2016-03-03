@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nu.t4.beans;
+package nu.t4.beans.elev;
 
 import com.mysql.jdbc.Connection;
 import java.math.BigDecimal;
@@ -13,7 +13,9 @@ import javax.ejb.Stateless;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import javax.json.JsonValue;
+import nu.t4.beans.ConnectionFactory;
 
 /**
  *
@@ -23,9 +25,19 @@ import javax.json.JsonValue;
 public class ElevManager {
     
     public JsonArray getElevFranKlass(int klass_id){
-        try {
-            Connection conn = ConnectionFactory.getConnection();
             String sql = String.format("SELECT * FROM aplapp.skolans_användare WHERE klass = %d AND behörighet = 0;", klass_id);
+            return getElever(sql);
+    }
+    public JsonArray getElevAll(){
+            String sql = String.format("SELECT * FROM aplapp.skolans_användare WHERE behörighet = 0;");
+            return getElever(sql);
+    }
+    
+        
+    //Privata metoder
+    private JsonArray getElever(String sql){
+            try {
+            Connection conn = ConnectionFactory.getConnection();
             Statement stmt = conn.createStatement();
             ResultSet data = stmt.executeQuery(sql);
             JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
@@ -45,6 +57,6 @@ public class ElevManager {
             System.out.println("Error from ElevManager:getElevFranKlass: "+e.getMessage());
             return null;
         }
-        
     }
+
 }

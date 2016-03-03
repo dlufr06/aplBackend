@@ -16,12 +16,15 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 
     //Databas inloggning
-    private static final String DATABASE_USER = "aplapp";
-    private static final String DATABASE_PASS = "Teknikum123";
+   // private static final String DATABASE_USER = "aplapp";
+   //private static final String DATABASE_PASS = "Teknikum123";
+   private static final String DATABASE_USER = "root";
+   private static final String DATABASE_PASS = "";
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-        String url = "jdbc:mysql://10.97.72.5/aplapp";
+        //String url = "jdbc:mysql://10.97.72.5/aplapp";
+        String url = "jdbc:mysql://localhost/aplapp";
         return (Connection) DriverManager
                 .getConnection(url, DATABASE_USER, DATABASE_PASS);
     }

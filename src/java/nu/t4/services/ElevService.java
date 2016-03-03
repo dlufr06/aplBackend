@@ -26,7 +26,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import nu.t4.beans.APLManager;
 import nu.t4.beans.AktivitetManager;
-import nu.t4.beans.ElevManager;
+import nu.t4.beans.elev.ElevManager;
 
 /**
  *
